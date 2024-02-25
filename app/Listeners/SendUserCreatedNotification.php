@@ -21,6 +21,6 @@ class SendUserCreatedNotification
      */
     public function handle(UserCreated $event): void
     {
-        //
+        //$event->data
     }
 }
