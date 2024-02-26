@@ -38,7 +38,7 @@ class RabbitMQService
 
     public function consume($callback)
     {
-        $this->channel->basic_consume($this->queue, '', false, true, false, false, $callback);
+       return $this->channel->basic_consume($this->queue, '', false, true, false, false, $callback);
 
         // while ($this->channel->is_consuming()) {
         //     $this->channel->wait();
