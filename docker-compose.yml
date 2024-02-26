@@ -43,20 +43,21 @@ services:
 
   rabbit:
     image: "rabbitmq:3-management"
-    hostname: "rabbit1"
+    hostname: "${RABBITMQ_HOST_NAME}"
     environment:
-      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-      RABBITMQ_DEFAULT_USER: "rabbitmq"
-      RABBITMQ_DEFAULT_PASS: "rabbitmq"
-      RABBITMQ_DEFAULT_VHOST: "/"
+      #RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
+      #RABBITMQ_DEFAULT_HOST: "${RABBITMQ_HOST}"
+      RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
     ports:
       - "15672:15672"
       - "5672:5672"
     labels:
-      NAME: "rabbitmq1"
+      NAME: "${RABBITMQ_NAME}"
     volumes:
-      - "./docker-compose/rabbitmq:/etc/rabbitmq/enabled_plugins"
-      - "./docker-compose/rabbitmq/log/:/var/log/rabbitmq"
+      #- "./docker-compose/rabbitmq:/etc/rabbitmq/enabled_plugins/"
+      - "./docker-compose/rabbitmq:/var/log/rabbitmq"
     networks:
       - googlelogin
 
