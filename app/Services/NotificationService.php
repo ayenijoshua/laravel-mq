@@ -11,11 +11,14 @@ class NotificationService{
 
     public function consume(){
 
+        //info('consuming');
+
         $callback = function($msg){
             info('rabbit',$msg->body);
         };
 
-        return retry(5, function () use ($callback) {
+        retry(5, function () use ($callback) {
+            info('consuming');
             // Attempt 5 times while resting 100ms between attempts...\
             $this->rabbitMqService->consume($callback);
         }, 100);

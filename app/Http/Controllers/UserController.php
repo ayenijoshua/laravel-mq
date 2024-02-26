@@ -8,6 +8,7 @@ use App\Services\UserService;
 use Illuminate\Support\Facades\Event;
 use App\Jobs\ConsumeMessage;
 
+
 class UserController extends Controller
 {
     private $service;
@@ -24,9 +25,9 @@ class UserController extends Controller
 
             $this->service->create($data);
 
-            Event::dispatch(new UserCreated($data));
+            UserCreated::dispatch($data);
 
-            ConsumeMessage::dispatch();//->delay(now()->addSeconds(5));
+            ConsumeMessage::dispatch()->delay(now()->addSeconds(5));
 
             return response()->json(['message'=>'User created successfully'],200);
     

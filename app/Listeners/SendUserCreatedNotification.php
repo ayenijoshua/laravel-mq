@@ -23,6 +23,7 @@ class SendUserCreatedNotification
      */
     public function handle(UserCreated $event): void
     {
+        info('event');
         $message = json_encode($event->data);
         $this->rabbitMqService->publish($message);
     }

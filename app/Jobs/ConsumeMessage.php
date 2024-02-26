@@ -26,6 +26,7 @@ class ConsumeMessage implements ShouldQueue
      */
     public function handle(): void
     {
+        info('job');
         (new NotificationService)->consume();
     }
 }
