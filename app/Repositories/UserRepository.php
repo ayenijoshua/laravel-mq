@@ -5,6 +5,7 @@ use App\Models\User;
 class UserRepository{
 
     public function create(array $data): void{
+        //info('user',$data);
         (new User($data))->save();
     }
 

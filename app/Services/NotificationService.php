@@ -18,9 +18,7 @@ class NotificationService{
         return retry(5, function () use ($callback) {
             // Attempt 5 times while resting 100ms between attempts...\
             $this->rabbitMqService->consume($callback);
-        }, 100, function () use ($callback) {
-            !$this->rabbitMqService->consume($callback);
-        });
+        }, 100);
         
     }
 

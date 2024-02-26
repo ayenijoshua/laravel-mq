@@ -13,18 +13,24 @@ RUN apt-get update && apt-get install -y \
   libonig-dev \
   libxml2-dev \
   zip \
-  unzip
+  unzip \
+  nano
   
 #clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+#RUN apt-get install nano -y
+
 #install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 
 # get latest composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-#copy .env.example to .env
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *memory_limit.*/memory_limit = 4G/g" /usr/local/etc/php/php.ini
+
+#copy .env.example to .env extension=php_sockets.dll
 
 # generate artisan key
 

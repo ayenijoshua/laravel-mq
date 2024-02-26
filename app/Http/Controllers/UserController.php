@@ -21,12 +21,12 @@ class UserController extends Controller
             }
     
             $data = $request->validated();
-    
+
             $this->service->create($data);
 
             Event::dispatch(new UserCreated($data));
 
-            ConsumeMessage::dispatch()->delay(now()->addSeconds(5));
+            ConsumeMessage::dispatch();//->delay(now()->addSeconds(5));
 
             return response()->json(['message'=>'User created successfully'],200);
     
